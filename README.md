@@ -55,7 +55,7 @@ In order to reload your environment variables without going through the logout/l
 
 If you want to automate this two step process with a script, download and make it executable (assuming you have a `~/bin` directory and its on your `$PATH` as in the example above):
 
-`curl https://raw.githubusercontent.com/ersiner/osx-env-sync/master/osx-env-sync.sh -o ~/bin/osx-env-sync-now`
+`curl https://raw.githubusercontent.com/ersiner/osx-env-sync/master/osx-env-sync-now -o ~/bin/osx-env-sync-now`
 
 `chmod +x ~/bin/osx-env-sync-now`
 
