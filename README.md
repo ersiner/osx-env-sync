@@ -18,6 +18,7 @@ export GOPATH="$HOME/go"
 export PATH="$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export PATH="$PATH:$HOME/bin"
 ```
 
 Open your terminal and follow the steps below.
@@ -46,11 +47,21 @@ After the initial setup (that you just did), if you want to reflect any changes 
 
 `<$HOME>/Library/LaunchAgents/osx-env-sync.plist: Operation already in progress`
 
-In order to reload your environment variables without going through the logout/login process do the following:
+In order to reload your environment variables without going through the logout/login process, do the following:
 
 `launchctl unload ~/Library/LaunchAgents/osx-env-sync.plist`
 
 `launchctl load ~/Library/LaunchAgents/osx-env-sync.plist`
+
+If you want to automate this two step process with a script, download and make it executable (assuming you have a `~/bin` directory and its on your `$PATH` as in the example above):
+
+`curl https://raw.githubusercontent.com/ersiner/osx-env-sync/master/osx-env-sync.sh -o ~/bin/osx-env-sync-now.sh`
+
+`chmod +x ~/bin/osx-env-sync-now.sh`
+
+And run the script whenever you want to reload your environment variables:
+
+`osx-env-sync-now.sh`
 
 Finally make sure that you relaunch your already running applications (including Terminal.app) to make them aware of the changes.
 
