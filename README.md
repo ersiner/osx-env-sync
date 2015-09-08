@@ -55,13 +55,13 @@ In order to reload your environment variables without going through the logout/l
 
 If you want to automate this two step process with a script, download and make it executable (assuming you have a `~/bin` directory and its on your `$PATH` as in the example above):
 
-`curl https://raw.githubusercontent.com/ersiner/osx-env-sync/master/osx-env-sync.sh -o ~/bin/osx-env-sync-now.sh`
+`curl https://raw.githubusercontent.com/ersiner/osx-env-sync/master/osx-env-sync.sh -o ~/bin/osx-env-sync-now`
 
-`chmod +x ~/bin/osx-env-sync-now.sh`
+`chmod +x ~/bin/osx-env-sync-now`
 
 And run the script whenever you want to reload your environment variables:
 
-`osx-env-sync-now.sh`
+`osx-env-sync-now`
 
 Finally make sure that you relaunch your already running applications (including Terminal.app) to make them aware of the changes.
 
