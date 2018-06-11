@@ -5,9 +5,14 @@ PROG_DIR="$(dirname $0)"
 mkdir -pv ~/bin
 
 (
+    go get -v github.com/mexisme/osx-env-sync/osx-env-sync
+    cp -v $(go env GOPATH)/bin/osx-env-sync ~/.osx-env-sync
+)
+
+(
   cd "${PROG_DIR}"
   cp -v osx-env-sync.plist ~/Library/LaunchAgents/osx-env-sync.plist
-  cp -v osx-env-sync.rb ~/.osx-env-sync
+#   cp -v osx-env-sync.rb ~/.osx-env-sync
   cp -v osx-env-sync-now ~/bin/osx-env-sync-now
 )
 
