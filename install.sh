@@ -5,7 +5,7 @@ PROG_DIR="$(dirname $0)"
 mkdir -pv ~/bin
 
 if which go >/dev/null; then
-  go get -v github.com/mexisme/osx-env-sync/osx-env-sync
+  go get -u -v github.com/mexisme/osx-env-sync/osx-env-sync
   cp -v $(go env GOPATH)/bin/osx-env-sync ~/.osx-env-sync
 else
   (
