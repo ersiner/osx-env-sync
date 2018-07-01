@@ -32,7 +32,7 @@ func settings() {
 	viper.BindEnv("debug")
 	viper.BindEnv("noop")
 	// This allows us to override in a config file:
-	viper.BindEnv("shell")
+	viper.SetDefault("shell", "")
 
 	// This means any "." chars in a FQ config name will be replaced with "_"
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
@@ -228,7 +228,7 @@ func main() {
 	env := NewEnviron().AddOsEnviron()
 	log.WithField("Env", env).Debug()
 
-	shell := (&Shell{Env: env}).Choose()
+	shell := (&Shell{Shell: viper.GetString("shell"), Env: env}).Choose()
 	log.WithField("Found Shell", shell).Debug()
 
 	filteredEnv := env.NewFromFiltered(copiedEnvs)
