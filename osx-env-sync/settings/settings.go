@@ -1,12 +1,23 @@
+/*
+Package settings is for setting-up some basic settings, incl. standard Viper settings, and basic logging:
+- debug ($DEBUG) -- enable debug mode
+- noop ($NOOP) -- enable No-op mode (no sub-commands will actually be run)
+- shell (no env-var) -- allows overriding the standard shell-discovery in the "shell.Choose()" function
+
+These can all optionally be set in a "~/.osx-env-sync.toml" config file, or using the above run-time EnvVars.
+*/
 package settings
 
 import (
+	"github.com/mexisme/osx-env-sync/osx-env-sync/version"
+
 	"strings"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
+// Setup configures standard Viper and Logrus settings
 func Setup() {
 	config()
 	logging()
@@ -34,6 +45,9 @@ func config() {
 }
 
 func logging() {
+	// TODO: Should this be a Debug message?
+	log.Infof("## %#v release %v ##", version.Application(), version.Release())
+
 	if viper.GetBool("debug") {
 		log.SetLevel(log.DebugLevel)
 		log.Debug("Debug mode enabled")

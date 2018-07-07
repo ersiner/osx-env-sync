@@ -1,3 +1,6 @@
+/*
+Package getenv wraps running the appropriate commands for getting the user's environ.
+*/
 package getenv
 
 import (
@@ -5,6 +8,7 @@ import (
 
 	"bufio"
 	"bytes"
+	"os"
 	"os/exec"
 	"strings"
 
@@ -14,12 +18,15 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Command holds the configuration for running the command necessary to get the EnvVars from the user's shell.
 type Command struct {
 	Shell   string
 	Env     environ.Environ
 	command []string
 }
 
+// CommandLine returns the appropriate command-line to extract the environ from the user's shell.
+// Currently supports "bash" and "zsh".
 func (s *Command) CommandLine() ([]string, error) {
 	switch {
 	case strings.HasSuffix(s.Shell, "bash"):
@@ -31,6 +38,9 @@ func (s *Command) CommandLine() ([]string, error) {
 	return nil, errors.Errorf("I don't know how to work with %#v", s.Shell)
 }
 
+// Exec runs the necessary command, with the given environ, and returns the Stdout output.
+// StdErr for the command is sent to the user.
+// If No-op mode has been set, the command isn't run, but what would have been run is logged.
 func (s *Command) Exec() ([]byte, error) {
 	command, err := s.CommandLine()
 	if err != nil {
@@ -44,6 +54,7 @@ func (s *Command) Exec() ([]byte, error) {
 	log.WithField("Command", command).Info("Running command...")
 	cmd := exec.Command(command[0], command[1:]...)
 	cmd.Env = s.Env.ToOsEnviron()
+	cmd.Stderr = os.Stderr
 	output, err := cmd.Output()
 	if err != nil {
 		log.WithFields(log.Fields{"Command": command, "Cmd": cmd}).Debug("Command failed")
@@ -54,6 +65,7 @@ func (s *Command) Exec() ([]byte, error) {
 	return output, nil
 }
 
+// ExecToLines runs the command, and parses Stdout into an array of NL-separated lines.
 func (s *Command) ExecToLines() ([]string, error) {
 	output, err := s.Exec()
 	if err != nil {
