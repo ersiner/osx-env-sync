@@ -1,7 +1,10 @@
 /*
 Package settings is for setting-up some basic settings, incl. standard Viper settings, and basic logging:
+
 - debug ($DEBUG) -- enable debug mode
+
 - noop ($NOOP) -- enable No-op mode (no sub-commands will actually be run)
+
 - shell (no env-var) -- allows overriding the standard shell-discovery in the "shell.Choose()" function
 
 These can all optionally be set in a "~/.osx-env-sync.toml" config file, or using the above run-time EnvVars.
