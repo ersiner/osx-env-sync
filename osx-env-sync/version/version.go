@@ -5,7 +5,7 @@ package version
 
 const (
 	application = "osx-env-sync"
-	release     = "0.3.3"
+	release     = "0.3.4"
 )
 
 // Application is the "friendly" name for this code
