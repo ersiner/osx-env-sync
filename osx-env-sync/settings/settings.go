@@ -20,6 +20,10 @@ import (
 	"github.com/spf13/viper"
 )
 
+func init() {
+	Setup()
+}
+
 // Setup configures standard Viper and Logrus settings
 func Setup() {
 	config()
