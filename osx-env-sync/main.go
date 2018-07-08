@@ -5,7 +5,7 @@ import (
 	"github.com/mexisme/osx-env-sync/osx-env-sync/command/getenv"
 	"github.com/mexisme/osx-env-sync/osx-env-sync/command/launchctl"
 	"github.com/mexisme/osx-env-sync/osx-env-sync/environ"
-	"github.com/mexisme/osx-env-sync/osx-env-sync/settings"
+	_ "github.com/mexisme/osx-env-sync/osx-env-sync/settings"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -15,10 +15,6 @@ var (
 	// TODO: Make this overridable:
 	copiedEnvs = []string{"HOME", "LOGNAME", "USER", "LANG"}
 )
-
-func init() {
-	settings.Setup()
-}
 
 func main() {
 	env := environ.New().AddOsEnviron()
