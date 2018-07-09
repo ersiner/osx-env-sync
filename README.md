@@ -25,7 +25,8 @@ no reason a more recent version shouldn't work with minimal tweaking.
 
 ## Installation
 
-You can run the included `./install.sh` script, which will install the Go version, if Go is installed, otherwise
+You can run the `make` in the root dir, that will run against the included `Makefile`.
+This will install the Go version, if Go is installed, otherwise
 fall-back to the Ruby version.
 
 It will assume the `$SHELL` env-var contains your preferred shell, but will then fall-back to using `zsh`.
