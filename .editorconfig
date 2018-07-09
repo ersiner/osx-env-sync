@@ -16,3 +16,6 @@ indent_style = tab
 
 [*.sh,*.zsh,*.bash]
 indent_size = 2
+
+[Makefile,*.mkf]
+indent_style = tab
