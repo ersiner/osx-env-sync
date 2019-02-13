@@ -12,11 +12,13 @@ import (
 	"os/exec"
 	"strings"
 
-	log "github.com/Sirupsen/logrus"
 	"github.com/go-errors/errors"
 	"github.com/hashicorp/errwrap"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
+
+const marker = "=====###====="
 
 // Command holds the configuration for running the command necessary to get the EnvVars from the user's shell.
 type Command struct {
@@ -30,9 +32,13 @@ type Command struct {
 func (s *Command) CommandLine() ([]string, error) {
 	switch {
 	case strings.HasSuffix(s.Shell, "bash"):
-		return []string{s.Shell, "--login", "-c", "env"}, nil
+		return []string{
+			s.Shell, "--login", "-c", "echo '" + marker + "'; env",
+		}, nil
 	case strings.HasSuffix(s.Shell, "zsh"):
-		return []string{s.Shell, "-i", "--login", "-c", "env"}, nil
+		return []string{
+			s.Shell, "-i", "--login", "-c", "echo '" + marker + "'; env",
+		}, nil
 	}
 	log.WithField("Shell", s.Shell).Debug("Unrecognised shell")
 	return nil, errors.Errorf("I don't know how to work with %#v", s.Shell)
@@ -74,8 +80,16 @@ func (s *Command) ExecToLines() ([]string, error) {
 
 	lines := make([]string, 0)
 	scanner := bufio.NewScanner(bytes.NewReader(output))
+	skipUntilMarker := true
 	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+		line := scanner.Text()
+		switch {
+		case line == marker:
+			// This will mean the following lines will be collected, but not the current 'marker' line:
+			skipUntilMarker = false
+		case !skipUntilMarker:
+			lines = append(lines, line)
+		}
 	}
 	if err := scanner.Err(); err != nil {
 		log.WithFields(log.Fields{"Err": err, "Lines (so far)": lines}).Debug("Failed to parse the output")

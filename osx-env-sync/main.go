@@ -7,7 +7,7 @@ import (
 	"github.com/mexisme/osx-env-sync/osx-env-sync/environ"
 	_ "github.com/mexisme/osx-env-sync/osx-env-sync/settings"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 

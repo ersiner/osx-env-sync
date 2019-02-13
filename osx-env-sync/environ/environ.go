@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 // Environ type holds a Map of EnvVar=Val KV-pairs.
