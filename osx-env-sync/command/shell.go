@@ -6,7 +6,7 @@ package command
 import (
 	"github.com/mexisme/osx-env-sync/osx-env-sync/environ"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 const (

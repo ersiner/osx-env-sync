@@ -12,7 +12,7 @@ import (
 	"os/exec"
 	"strings"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/go-errors/errors"
 	"github.com/hashicorp/errwrap"
 	"github.com/spf13/viper"
