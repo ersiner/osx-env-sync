@@ -10,7 +10,7 @@
     <string>-l</string>
     <string>-c</string>
     <string>
-      $HOME/.osx-env-sync.sh
+      $HOME/.osx-env-sync
     </string>
   </array>
   <key>RunAtLoad</key>
